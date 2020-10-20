@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, Dimensions } from 'react-native'
 import  MapView, { PROVIDER_GOOGLE, Marker, Callout }  from 'react-native-maps'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import { RectButton } from 'react-native-gesture-handler'
 import { Feather } from '@expo/vector-icons'
 
@@ -20,11 +20,11 @@ export default function AcademysMap(){
     const [academys, setAcademys] = useState<Academy[]>([])
     const navigation = useNavigation()
 
-  useEffect(() => {
+  useFocusEffect(() => {
     api.get('academys').then(response => {
       setAcademys(response.data)
     })
-  }, [])
+  })
 
     function handleNavigateToAcademyDetails(id: number){
         navigation.navigate('AcademyDetails', { id })
